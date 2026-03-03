@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Icon Generator</title>
+</head>
+<body>
+  <h2>Генератор иконки для расширения</h2>
+  <p>Откройте эту страницу в браузере, нажмите правой кнопкой на иконке ниже и выберите "Сохранить изображение как..." → сохраните как <code>icon.png</code></p>
+  
+  <canvas id="canvas" width="128" height="128"></canvas>
+  
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Фон
+    const gradient = ctx.createLinearGradient(0, 0, 128, 128);
+    gradient.addColorStop(0, '#667eea');
+    gradient.addColorStop(1, '#764ba2');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 128, 128);
+    
+    // Календарик
+    ctx.fillStyle = 'white';
+    ctx.fillRect(25, 30, 78, 68);
+    
+    // Верхняя часть календаря
+    ctx.fillStyle = '#667eea';
+    ctx.fillRect(25, 30, 78, 15);
+    
+    // Дата
+    ctx.fillStyle = '#2d3748';
+    ctx.font = 'bold 36px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('15', 64, 70);
+    
+    // Конвертируем в PNG и предлагаем скачать
+    canvas.toBlob((blob) => {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'icon.png';
+      document.body.appendChild(link);
+      
+      // Автоматически скачиваем
+      setTimeout(() => {
+        link.click();
+        document.body.removeChild(link);
+      }, 100);
+    });
+  </script>
+</body>
+</html>

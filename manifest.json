@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Banda Schedule Helper",
+  "version": "1.0.0",
+  "description": "Удобный просмотр графика работы из Banda",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://api.banda.tseh85.ru/*",
+    "https://banda.tseh85.ru/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://banda.tseh85.ru/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Banda Schedule"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
